@@ -78,3 +78,42 @@ def create_repost(label_result=None):
                         + "-Lớp có nhiều điểm A nhất là: {0} có {1} sinh viên đạt điểm A\n".format(in_data[i1,0],maxA)
                         + "-Lớp có ít điểm F nhất là: {0} có {1} sinh viên đạt điểm F\n".format(in_data[i2,0],minF)
                         + "-Lớp có nhiều điểm F nhất là: {0} có {1} sinh viên đạt điểm F\n".format(in_data[i3,0],maxF))
+    plt.plot(range(len(svA)), svA, 'r-', label="Diem A")
+    plt.plot(range(len(svBp)), svBp, 'o-', label="Diem B+")
+    plt.plot(range(len(svB)), svB, 'y-', label="Diem B")
+    plt.plot(range(len(svCp)), svCp, 'g-', label="Diem C+")
+    plt.plot(range(len(svC)), svC, 'b-', label="Diem C")
+    plt.plot(range(len(svDp)), svDp, 'p-', label="Diem D+")
+    plt.plot(range(len(svD)), svD, 'm-', label="Diem D")
+    plt.plot(range(len(svF)), svF, 'k-', label="Diem F")
+    plt.xlabel('Lớp')
+    plt.ylabel('Số sv đạt điểm')
+    plt.legend(loc='upper right')
+
+    canvas = FigureCanvasTkAgg(plt.gcf(), master=plot_frame)
+    canvas.draw()
+    canvas.get_tk_widget().pack()
+
+
+w = Tk()
+w.title("Báo cáo học phần môn học")
+
+button_file = Button(w, text="Chọn file", command=open_file_dialog)
+button_file.pack()
+
+frame_data = Frame(w)
+frame_data.pack()
+
+button_cre = Button(w, text="Tạo báo cáo", command=create_repost)
+button_cre.pack()
+
+frame_result = Frame(w)
+frame_result.pack()
+
+label_result = Label(frame_result, text="", justify='left', font=('Helvetica', 10, 'bold'))
+label_result.pack(side=LEFT)
+
+plot_frame = Frame(frame_result)
+plot_frame.pack(side=LEFT)
+
+w.mainloop()
